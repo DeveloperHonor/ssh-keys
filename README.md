@@ -1,4 +1,4 @@
-#Step 1： Configure iplist files<br>
+# Step 1： Configure iplist files<br>
 example:
 ```
 cat iplist
@@ -9,7 +9,7 @@ host4
 host5
 host6
 ```
-#Step2:  Issusing script autoexssh.sh
+# Step2:  Issusing script autoexssh.sh
 ```
 sh autoexssh.sh usernanme password
 #example:
