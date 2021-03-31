@@ -1,4 +1,11 @@
 #!/bin/bash
+
+###################################################################
+# @Author:             Shaohua                                    #
+# @Date:               2021-03-31 14:40:32                        #
+# @Last Modified by:   DESKTOP
+# @Last Modified time: 2021-03-31 14:43:57
+###################################################################
  
 #Define Current Directory 
 CURRENT_DIR=$(cd "$(dirname $0)";pwd)
@@ -65,7 +72,7 @@ EOF
 done
 
 
-#测试连接避免提示符出现
+#所有服务器之间的相互连接避免提示符出现
 for ip in $IPLIST;do
 /usr/bin/expect <<EOF
     spawn ssh ${ip} date
@@ -76,6 +83,7 @@ for ip in $IPLIST;do
 EOF
 done
 
+#生成 remote_ssh 供远程服务器可以执行互相访问脚本，避免第一次连接出现手动交互的情况
 cat > ${CURRENT_DIR}/remote_ssh<<eof
 IPLIST="$(echo $(cat ${CURRENT_DIR}/iplist))"
 for ip in \${IPLIST} ;do
@@ -91,7 +99,7 @@ done
 eof
 
 
-#拷贝执行脚本
+#拷贝远程 remote_ssh 脚本，并在各节点远程执行
 for ip in $IPLIST;do
         scp ./remote_ssh  $ip:~/
 /usr/bin/expect <<EOF
@@ -102,3 +110,4 @@ for ip in $IPLIST;do
         }
 EOF
 done
+
