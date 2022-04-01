@@ -13,6 +13,9 @@ CURRENT_DIR=$(cd "$(dirname $0)";pwd)
 #Define Toplevel Directory
 TOPLEVEL_DIR=$(cd ${CURRENT_DIR}/..;pwd)
 
+#Define access file path
+ACCESSFILEPATH=/tmp
+
 IPLIST=$(cat ${CURRENT_DIR}/iplist)
 if [ $# -ne 2 ];then
     echo "Usage:sh $0 用户名 密码"
@@ -101,9 +104,9 @@ eof
 
 #拷贝远程 remote_ssh 脚本，并在各节点远程执行
 for ip in $IPLIST;do
-        scp ./remote_ssh  $ip:~/
+        scp ./remote_ssh  $ip:${ACCESSFILEPATH}
 /usr/bin/expect <<EOF
-        spawn ssh ${USER}@${ip} sh ~/remote_ssh
+        spawn ssh ${USER}@${ip} sh ${ACCESSFILEPATH}/remote_ssh
         expect {
                 "*yes/no*" { send "yes\r";exp_continue}
                 "*password*" { send "${PASSWD}\r"; exp_continue}
