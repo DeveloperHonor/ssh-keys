@@ -1,4 +1,4 @@
-# Required：Executing the script you need install expect tool for all servers using yum <br>
+# Required：Executing the script you need install expect tool for all servers using yum or dnf command <br>
 
 ```
 you need execute command as follows on Redhat Family OS before 7 version:
