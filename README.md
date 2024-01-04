@@ -1,3 +1,13 @@
+# Required：Executing the script you need install expect tool for all servers using yum <br>
+
+```
+you need execute command as follows on Redhat Family OS before 7 version:
+yum install -y expect
+or
+you need execute command as follows on Redhat Family OS after 8 version:
+dnf install -y expect
+```
+
 # Step 1： Configure iplist files<br>
 example:
 ```
